@@ -15,10 +15,14 @@ layout: base
   <div class="wrapper">
     <h2>{{ principles.title }}</h2>
     <ul class="grid mt-l-xl" role="list" data-rows="masonry" data-layout="50-50">
-      {% for item in principles.items %}
+      {%- for item in posts | limit(4) %}
       <li class="card flow">
-        <h3>{{ item.title }}</h3>
-        {{ item.summary | md | safe }}
+        <h3>
+          <a href="/posts/{{ item.title.rendered | slug }}">
+            {{ item.title.rendered }}
+          </a>
+        </h3>
+        {{ item.excerpt.rendered | safe }}
       </li>
       {% endfor %}
     </ul>

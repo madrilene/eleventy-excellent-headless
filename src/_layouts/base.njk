@@ -17,12 +17,6 @@
       crossorigin
     />
 
-    <!-- activating webc scoped styles und scripts -->
-    {% renderTemplate "webc" %}
-    <style @html="this.getCSS(this.page.url)"></style>
-    <script @html="this.getJS(this.page.url)"></script>
-    {% endrenderTemplate %}
-
     <link rel="stylesheet" href="/_assets/css/global.css?{{ assetHash }}" />
 
     <!--  Add facility for pages to declare an array of stylesheet paths -->

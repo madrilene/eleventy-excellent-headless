@@ -1,12 +1,15 @@
 ---
 permalink: /index.html
-title: ' Eleventy starter based on buildexcellentwebsit.es'
+title: ' WP headless & Eleventy starter based on buildexcellentwebsit.es'
 summary: 'Give the browser some solid rules and hints, then let it make the right decisions for the people that visit it, based on their device, connection quality and capabilities. This is how they will get a genuinely great user experience, rather than a fragmented, broken one.'
 metaDesc: 'Key principles using modern CSS, fluid type, fluid space, flexible layout and progressive enhancement will help you to build better front-ends that work for everyone.'
 layout: 'home'
+pagination:
+  data: posts
+  size: 100
 principles:
-  title: 'Key Foundations & Principles'
-  quote: 'Stick to those principles and making excellent websites that work for everyone suddenly becomes much, much easier.'
+  title: 'Latest Wordpress posts'
+  quote: 'This is a blazingly fast and secure website with a WordPress backend!'
   items:
     - title: 'Modern CSS with Methodologies'
       summary: |

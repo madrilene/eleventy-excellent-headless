@@ -46,7 +46,6 @@ const {EleventyRenderPlugin} = require('@11ty/eleventy');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const {slugifyString} = require('./config/utils');
 const {escape} = require('lodash');
-const pluginWebc = require('@11ty/eleventy-plugin-webc');
 
 module.exports = eleventyConfig => {
   // Tell 11ty to use the .eleventyignore and ignore our .gitignore file
@@ -103,9 +102,6 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.setLibrary('md', markdownLib);
-  eleventyConfig.addPlugin(pluginWebc, {
-    components: 'src/_includes/webc/*.webc'
-  });
 
   // 	--------------------- Passthrough File Copy -----------------------
 
