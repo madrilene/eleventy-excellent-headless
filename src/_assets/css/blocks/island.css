@@ -1,18 +1,3 @@
-details {
-  padding: 1em;
-  background-color: #eee;
-  border-radius: 0.5em;
-}
-details:not(:last-child) {
-  margin-bottom: 0.5em;
-}
-p:first-child {
-  margin-top: 0;
-}
-body {
-  padding-bottom: 20vh;
-}
-
 /* Demo styles */
 is-land,
 .demo-component {
@@ -50,15 +35,4 @@ is-land[ready] {
 .test-c-finish {
   background-color: rgba(112, 110, 233, 0.2);
   outline: 2px solid rgb(97, 82, 173);
-}
-
-/* List logos */
-.examples {
-  line-height: 2;
-}
-.examples img {
-  margin-right: 0.3em;
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: text-bottom;
 }
