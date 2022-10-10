@@ -1,18 +1,24 @@
 # Eleventy starter
 
-Very opiniated Eleventy starter based on the workflow suggested by Andy Bell's <https://buildexcellentwebsit.es/>.
+Very opiniated Eleventy + WP headless starter based on the workflow suggested by Andy Bell's <https://buildexcellentwebsit.es/>.
 
 - [Eleventy starter](#eleventy-starter)
   - [Logbook](#logbook)
+    - [22-10-10](#22-10-10)
     - [22-10-03](#22-10-03)
     - [22-10-04](#22-10-04)
   - [Using this](#using-this)
     - [Install dependencies](#install-dependencies)
     - [Working locally](#working-locally)
     - [Creating a production build](#creating-a-production-build)
+    - [Adjusting Wordpress posts](#adjusting-wordpress-posts)
   - [Credits and Thank yous](#credits-and-thank-yous)
 
 ## Logbook
+
+### 22-10-10
+
+Added Wordpress posts via REST API
 
 ### 22-10-03
 
@@ -46,6 +52,10 @@ Minify JS, inline and minify CSS.
 ```
 npm run build
 ```
+
+### Adjusting Wordpress posts
+
+Create .env in root and set FETCH_BASE_URL to your base WordPress URL.
 
 ## Credits and Thank yous
 

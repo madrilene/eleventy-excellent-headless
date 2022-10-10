@@ -4,7 +4,7 @@
   "engines": {
     "node": "16.x"
   },
-  "description": "Eleventy starter based on the workflow suggested by Andy Bell's https://buildexcellentwebsit.es/. Using Every Layout and WebC.",
+  "description": "Eleventy starter with headless WordPress based on the workflow suggested by Andy Bell's https://buildexcellentwebsit.es/. Using Every Layout and WebC.",
   "main": ".eleventy.js",
   "scripts": {
     "clean": "rimraf dist",
