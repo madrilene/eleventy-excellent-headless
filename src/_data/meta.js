@@ -3,13 +3,13 @@ module.exports = {
   siteDescription:
     'Frontend developer based in Madrid. I enjoy working with Jamstack, vanilla Javascript and modern CSS. I do my very best to improve in terms of accessibility and performance. ',
   siteType: 'Person', // schema
-  siteURL: 'https://www.lene.dev',
+  siteURL: 'https://www.mediao.de/',
   locale: 'en_EN',
   lang: 'en',
   skipContent: 'Skip to content',
   author: 'Lene Saile',
   authorEmail: 'hola@lenesaile.com',
-  authorWebsite: 'https://www.lenesaile.com',
+  authorWebsite: 'https://www.lene.dev',
   meta_data: {
     twitterSite: '@lenesaile',
     twitterCreator: '@lenesaile',
