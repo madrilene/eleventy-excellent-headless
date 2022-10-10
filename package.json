@@ -11,7 +11,7 @@
     "dev:postcss": "postcss src/_assets/css/global.css --o dist/_assets/css/global.css --watch --verbose",
     "dev:scripts": "esbuild src/_assets/scripts/app.js src/_assets/scripts/is-land.js --watch --outdir=dist/_assets",
     "dev:11ty": "eleventy --serve --watch",
-    "build:postcss": "NODE_ENV=production postcss src/_assets/css/global.css -o src/_includes/global.css",
+    "build:postcss": "NODE_ENV=production postcss src/_assets/css/global.css -o dist/_assets/css/global.css",
     "build:11ty": "cross-env ELEVENTY_ENV=production eleventy",
     "build:scripts": "esbuild src/_assets/scripts/app.js src/_assets/scripts/is-land.js --bundle --minify --outdir=dist/_assets --platform=node --tree-shaking=true",
     "start": "run-p dev:*",
