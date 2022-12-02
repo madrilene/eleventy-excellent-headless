@@ -1,10 +1,10 @@
 {
-  "name": "eleventy-excellent",
-  "version": "1.1.2",
+  "name": "eleventy-excellent-headless",
+  "version": "1.1.3",
   "engines": {
     "node": ">=16.x.x"
   },
-  "description": "Eleventy starter based on the workflow suggested by Andy Bell's buildexcellentwebsit.es.",
+  "description": "Eleventy starter based on the workflow suggested by Andy Bell's buildexcellentwebsit.es. Gets its blog posts from a WordPress site via Eleventy Fetch plugin",
   "main": ".eleventy.js",
   "scripts": {
     "clean": "rimraf dist",
@@ -20,7 +20,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/madrilene/eleventy-excellent.git"
+    "url": "https://github.com/madrilene/eleventy-excellent-headless.git"
   },
   "author": "Lene Saile",
   "license": "ISC",

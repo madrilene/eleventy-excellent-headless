@@ -1,6 +1,8 @@
 # Eleventy starter
 
-Opiniated but easy to use Eleventy starter, based on the workflow suggested by Andy Bell's buildexcellentwebsit.es.
+Opiniated but easy to use [Eleventy](https://www.11ty.dev/) starter, based on the workflow suggested by Andy Bell's buildexcellentwebsit.es.
+
+This starter is the same as the [native Eleventy starter](https://github.com/madrilene/eleventy-excellent), but it gets its blog posts from a WordPress site. For now, static sites are handled via markdown in Eleventy, the blog posts are fetched. I created a seperate repository because this project may develop in a different direction from now on.
 
 If you end up using this starter, feel free to send me a link, I'd love to see it!
 Also let me know if you miss any features. Currently in planning: automatically generated OpenGraph images (as fallback) and dark mode.
