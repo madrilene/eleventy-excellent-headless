@@ -1,6 +1,12 @@
 ---
-layout: page
+layout: base
 ---
+
+<article class="region">
+  <div class="wrapper flow prose">
+    {{ content | safe }}
+  </div>
+</article>
 
 <!-- include blogpost schema  -->
 {%- include "schemas/blogpost-schema.njk" %}

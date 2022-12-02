@@ -1,42 +1,30 @@
 /**
  * I strive to keep the `.eleventy.js` file clean and uncluttered. Most adjustments must be made in:
- *  - `src/config/collections.js`
- *  - `src/config/filters.js`
- *  - `src/config/plugins.js`
- *  - `src/config/shortcodes.js`
- *  - `src/config/transforms.js`
+ *  - `./config/filters/index.js`
+ *  - `./config/plugins/index.js`
+ *  - `./config/shortcodes/index.js`
+ *  - `./config/transforms/index.js`
  */
 
 // module import filters
 const {
-  wordCount,
   limit,
-  sortByKey,
   toHtml,
   where,
+  excerpt,
   toISOString,
   formatDate,
-  dividedBy,
-  newlineToBr,
   toAbsoluteUrl,
-  stripNewlines,
   stripHtml,
-  getLatestCollectionItemDate,
   minifyCss,
   mdInline
 } = require('./config/filters/index.js');
 
 // module import shortcodes
-const {
-  asideShortcode,
-  insertionShortcode,
-  imageShortcode,
-  imageShortcodePlaceholder,
-  liteYoutube
-} = require('./config/shortcodes/index.js');
+const {imageShortcodePlaceholder, liteYoutube} = require('./config/shortcodes/index.js');
 
 // module import collections
-const {getAllProjects} = require('./config/collections/index.js');
+const {getAllPosts} = require('./config/collections/index.js');
 
 // module import transforms
 
@@ -46,39 +34,36 @@ const {EleventyRenderPlugin} = require('@11ty/eleventy');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const {slugifyString} = require('./config/utils');
 const {escape} = require('lodash');
+const pluginRss = require('@11ty/eleventy-plugin-rss');
 
 module.exports = eleventyConfig => {
   // Tell 11ty to use the .eleventyignore and ignore our .gitignore file
   eleventyConfig.setUseGitIgnore(false);
 
   // 	--------------------- Custom Watch Targets -----------------------
-  eleventyConfig.addWatchTarget('./src/_assets');
+  eleventyConfig.addWatchTarget('./src/assets');
   eleventyConfig.addWatchTarget('./utils/*.js');
 
   // --------------------- layout aliases -----------------------
   eleventyConfig.addLayoutAlias('base', 'base.njk');
   eleventyConfig.addLayoutAlias('page', 'page.njk');
   eleventyConfig.addLayoutAlias('home', 'home.njk');
+  eleventyConfig.addLayoutAlias('blog', 'blog.njk');
   eleventyConfig.addLayoutAlias('post', 'post.njk');
 
   // 	---------------------  Custom filters -----------------------
-  eleventyConfig.addFilter('wordCount', wordCount);
   eleventyConfig.addFilter('limit', limit);
-  eleventyConfig.addFilter('sortByKey', sortByKey);
   eleventyConfig.addFilter('where', where);
+  eleventyConfig.addFilter('excerpt', excerpt);
   eleventyConfig.addFilter('escape', escape);
   eleventyConfig.addFilter('toHtml', toHtml);
   eleventyConfig.addFilter('toIsoString', toISOString);
   eleventyConfig.addFilter('formatDate', formatDate);
-  eleventyConfig.addFilter('dividedBy', dividedBy);
-  eleventyConfig.addFilter('newlineToBr', newlineToBr);
   eleventyConfig.addFilter('toAbsoluteUrl', toAbsoluteUrl);
-  eleventyConfig.addFilter('stripNewlines', stripNewlines);
   eleventyConfig.addFilter('stripHtml', stripHtml);
   eleventyConfig.addFilter('slugify', slugifyString);
   eleventyConfig.addFilter('toJson', JSON.stringify);
   eleventyConfig.addFilter('fromJson', JSON.parse);
-  eleventyConfig.addFilter('getLatestCollectionItemDate', getLatestCollectionItemDate);
   eleventyConfig.addFilter('cssmin', minifyCss);
   eleventyConfig.addFilter('md', mdInline);
   eleventyConfig.addFilter('keys', Object.keys);
@@ -86,9 +71,6 @@ module.exports = eleventyConfig => {
   eleventyConfig.addFilter('entries', Object.entries);
 
   // 	--------------------- Custom shortcodes ---------------------
-  eleventyConfig.addPairedShortcode('aside', asideShortcode);
-  eleventyConfig.addPairedShortcode('insertion', insertionShortcode);
-  eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode);
   eleventyConfig.addNunjucksAsyncShortcode('imagePlaceholder', imageShortcodePlaceholder);
   eleventyConfig.addShortcode('youtube', liteYoutube);
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`); // current year, stephanie eckles
@@ -96,46 +78,49 @@ module.exports = eleventyConfig => {
   // 	--------------------- Custom transforms ---------------------
 
   // 	--------------------- Custom collections -----------------------
-  eleventyConfig.addCollection('projects', getAllProjects);
 
   // 	--------------------- Plugins ---------------------
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.setLibrary('md', markdownLib);
+  eleventyConfig.addPlugin(pluginRss);
 
   // 	--------------------- Passthrough File Copy -----------------------
 
-  eleventyConfig.addPassthroughCopy('src/_assets/fonts/');
-  eleventyConfig.addPassthroughCopy('src/_assets/images/');
+  // same path
 
-  // social icons von images zu root
+  ['src/assets/fonts/', 'src/assets/images/'].forEach(path =>
+    eleventyConfig.addPassthroughCopy(path)
+  );
+
+  // social images to root
+
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/site.webmanifest': 'site.webmanifest'
+    'src/assets/images/favicon/favicon.ico': 'favicon.ico'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/favicon.ico': 'favicon.ico'
+    'src/assets/images/favicon/favicon.svg': 'favicon.svg'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/favicon.svg': 'favicon.svg'
+    'src/assets/images/favicon/apple-touch-icon.png': 'apple-touch-icon.png'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/apple-touch-icon.png': 'apple-touch-icon.png'
+    'src/assets/images/favicon/favicon-32x32.png': 'favicon-32x32.png'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/favicon-32x32.png': 'favicon-32x32.png'
+    'src/assets/images/favicon/favicon-16x16.png': 'favicon-16x16.png'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/favicon-16x16.png': 'favicon-16x16.png'
+    'src/assets/images/favicon/android-chrome-192x192.png': 'android-chrome-192x192.png'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/android-chrome-192x192.png': 'android-chrome-192x192.png'
+    'src/assets/images/favicon/android-chrome-512x512.png': 'android-chrome-512x512.png'
   });
   eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/android-chrome-512x512.png': 'android-chrome-512x512.png'
+    'src/assets/images/favicon/maskable.png': 'maskable.png'
   });
-  eleventyConfig.addPassthroughCopy({
-    'src/_assets/images/favicon/maskable.png': 'maskable.png'
-  });
+
+  // 	--------------------- Config -----------------------
 
   return {
     dir: {

@@ -1,7 +1,7 @@
 {% set assetHash = global.random() %}
 
 <!DOCTYPE html>
-<html lang="{{ meta.lang }} ">
+<html lang="{{ meta.lang }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,15 +9,43 @@
     {% include "partials/meta-info.njk" %}
 
     <!-- fonts preload -->
+
     <link
       rel="preload"
-      href="/_assets/fonts/outfit/outfit-v5-latin-regular.woff2"
+      href="/assets/fonts/inter/inter-v7-latin-500.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
 
-    <link rel="stylesheet" href="/_assets/css/global.css?{{ assetHash }}" />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter/inter-v7-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link
+      rel="preload"
+      href="/assets/fonts/redhat/red-hat-display-v7-latin-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link
+      rel="preload"
+      href="/assets/fonts/robotomono/robotomono-variablefont_wght-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="stylesheet" href="/assets/css/global.css?{{ assetHash }}" />
+
+    <!-- defer js  -->
+    <script type="module" src="/assets/app.js" defer></script>
 
     <!--  Add facility for pages to declare an array of stylesheet paths -->
     {% if pageStylesheets %} {% for item in pageStylesheets %}
@@ -29,21 +57,8 @@
     />
     {% endfor %} {% endif %}
 
-    <!-- defer js  -->
-    <script type="module" src="/_assets/app.js" defer></script>
-    <script type="module" src="/_assets/is-land.js" defer></script>
-
-    <!-- <script type="module" src="/is-land.js"></script> -->
-
-    <!-- plausible for gdpr-compliant stats
-        <script
-        defer
-        data-domain="lene.dev"
-        src="https://plausible.io/js/plausible.js"
-      ></script> -->
-
     <!-- include base schema  -->
-    {%- include "schemas/base-schema.njk" %}
+    {% include "schemas/base-schema.njk" %}
   </head>
 
   <body>
@@ -55,5 +70,13 @@
 
     <!-- footer -->
     {% include "partials/footer.njk" %}
+
+    <!-- youtube if actvated in yaml -->
+    {% if youtube %}
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.4.0/lite-youtube.min.js"
+    ></script>
+    {% endif %}
   </body>
 </html>

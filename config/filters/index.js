@@ -33,6 +33,12 @@ const wordCount = str => {
   return matches?.length ?? 0;
 };
 
+/** Returns the word count of the given string. */
+const excerpt = str => {
+  const content = str.replace(/(<([^>]+)>)/gi, '');
+  return content.substr(0, content.lastIndexOf(' ', 200)) + '...';
+};
+
 /** Converts the given markdown string to HTML, returning it as a string. */
 const toHtml = markdownString => {
   return markdownLib.renderInline(markdownString);
@@ -138,6 +144,7 @@ module.exports = {
   sortByKey,
   where,
   wordCount,
+  excerpt,
   toHtml,
   toISOString,
   formatDate,

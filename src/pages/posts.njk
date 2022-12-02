@@ -4,10 +4,9 @@ pagination:
   size: 1
   alias: posts
 permalink: 'posts/{{ posts.title.rendered | slug }}/'
-layout: page
+layout: post
 ---
 
 <h1 class="gradient-text">{{ posts.title.rendered }}</h1>
-<div class="mainContent">
-  {{ posts.content.rendered | safe }}
-</div>
+
+{{ posts.content.rendered | safe }}
