@@ -24,7 +24,7 @@ Also let me know if you miss any features. Currently in planning: automatically 
 
 ## Preview
 
-https://eleventy-excellent.netlify.app/
+https://eleventy-excellent-headless.netlify.app
 
 ## Features
 
