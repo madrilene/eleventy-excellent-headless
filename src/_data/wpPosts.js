@@ -1,17 +1,15 @@
-require('dotenv').config();
 const EleventyFetch = require('@11ty/eleventy-fetch');
-const wpUrl = process.env.CMS;
 
 async function getPosts() {
   try {
-    const endpoint = `${wpUrl}/wp-json/wp/v2/posts`;
-    const response = EleventyFetch(endpoint, {
-      duration: '2m',
+    const fakeUrl = `https://headless.mediao.de/wp-json/wp/v2/posts`;
+    const response = EleventyFetch(fakeUrl, {
+      duration: '1d',
       type: 'json'
     });
-    const posts = await response;
-    console.log(endpoint);
-    return posts;
+    const articles = await response;
+    console.log(fakeUrl);
+    return articles;
   } catch (e) {
     console.log(e);
   }
