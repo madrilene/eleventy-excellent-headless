@@ -24,7 +24,7 @@ const {
 const {imageShortcodePlaceholder, liteYoutube} = require('./config/shortcodes/index.js');
 
 // module import collections
-const {getAllPosts} = require('./config/collections/index.js');
+const {wpPosts} = require('./config/collections/index.js');
 
 // module import transforms
 
@@ -35,6 +35,10 @@ const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const {slugifyString} = require('./config/utils');
 const {escape} = require('lodash');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
+
+// get access to environment variables in templates
+const inspect = require('node:util').inspect;
+require('dotenv').config();
 
 module.exports = eleventyConfig => {
   // Tell 11ty to use the .eleventyignore and ignore our .gitignore file
@@ -70,6 +74,8 @@ module.exports = eleventyConfig => {
   eleventyConfig.addFilter('values', Object.values);
   eleventyConfig.addFilter('entries', Object.entries);
 
+  eleventyConfig.addFilter('inspect', value => inspect(value, {sorted: true}));
+
   // 	--------------------- Custom shortcodes ---------------------
   eleventyConfig.addNunjucksAsyncShortcode('imagePlaceholder', imageShortcodePlaceholder);
   eleventyConfig.addShortcode('youtube', liteYoutube);
@@ -78,12 +84,17 @@ module.exports = eleventyConfig => {
   // 	--------------------- Custom transforms ---------------------
 
   // 	--------------------- Custom collections -----------------------
+  eleventyConfig.addCollection('posts', wpPosts);
 
   // 	--------------------- Plugins ---------------------
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.setLibrary('md', markdownLib);
   eleventyConfig.addPlugin(pluginRss);
+
+  // 	--------------------- Global data -----------------------
+
+  eleventyConfig.addGlobalData('env', process.env);
 
   // 	--------------------- Passthrough File Copy -----------------------
 

@@ -4,7 +4,9 @@ layout: base
 
 <article class="region">
   <div class="wrapper flow prose">
-    {{ content | safe }}
+    <h1 class="gradient-text">{{ posts.title.rendered }}</h1>
+
+    {{ posts.content.rendered | replace(env.CMS, '') | replace(env.MEDIAPATH, env.IMAGEPATH) | safe }}
   </div>
 </article>
 

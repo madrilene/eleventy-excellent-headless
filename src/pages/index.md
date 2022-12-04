@@ -4,7 +4,7 @@ title: ' Eleventy Excellent headless'
 description: 'An Eleventy starter with a headless WordPress workflow.'
 layout: 'home'
 pagination:
-  data: posts
+  data: wpPosts
   size: 100
 blog:
   title: 'Blog'

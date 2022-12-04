@@ -25,10 +25,11 @@ layout: base
   {%- for item in pagination.items %}
   <li class="card flow">
     <h2>
-      <a href="/posts/{{ item.title.rendered | slug }}">
+      <a href="/blog/{{ item.title.rendered | slug }}">
         {{ item.title.rendered }}
       </a>
     </h2>
+    {% include 'partials/date.njk' %}
     <p>{{ item.excerpt.rendered | excerpt | safe }}</p>
   </li>
   {% endfor %}

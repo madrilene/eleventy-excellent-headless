@@ -28,13 +28,14 @@ layout: base
   <!-- TODO: duplicate of partials/blog.njk -->
 
   <ul class="wrapper grid mt-l-xl" role="list" data-rows="masonry" data-layout="50-50">
-    {%- for item in posts | limit(4) %}
+    {%- for item in wpPosts | limit(4) %}
     <li class="card flow">
       <h3>
-        <a href="/posts/{{ item.title.rendered | slug }}">
+        <a href="/blog/{{ item.title.rendered | slug }}">
           {{ item.title.rendered }}
         </a>
       </h3>
+      {% include 'partials/date.njk' %}
       <p>{{ item.excerpt.rendered | excerpt | safe }}</p>
     </li>
     {% endfor %}

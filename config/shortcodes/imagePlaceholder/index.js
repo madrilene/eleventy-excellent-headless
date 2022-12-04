@@ -2,7 +2,7 @@ const Image = require('@11ty/eleventy-img');
 const path = require('path');
 const htmlmin = require('html-minifier');
 
-const imageShortcodePlaceholder = async (src, alt, caption, sizes = '100vw') => {
+const wpImageShortcodePlaceholder = async (src, alt, caption, sizes = '100vw') => {
   if (!alt) {
     throw new Error(`Missing \`alt\` on myImage from: ${src}`);
   }
@@ -61,4 +61,4 @@ const imageShortcodePlaceholder = async (src, alt, caption, sizes = '100vw') => 
   );
 };
 
-module.exports = imageShortcodePlaceholder;
+module.exports = wpImageShortcodePlaceholder;

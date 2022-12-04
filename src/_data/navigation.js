@@ -6,7 +6,7 @@ module.exports = {
     },
     {
       text: 'Blog',
-      url: '/posts/page-0/'
+      url: '/blog/page-1/'
     }
   ],
   bottom: [
