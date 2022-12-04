@@ -139,6 +139,10 @@ const mdInline = (content, opts) => {
   return inline ? md.renderInline(content) : md.render(content);
 };
 
+const wpToEleventy = (content = '') => {
+  return content.replace(/{(\w+?):(.*?)}/g, `<span x-text="query.$1">$2</span>`);
+};
+
 module.exports = {
   limit,
   sortByKey,

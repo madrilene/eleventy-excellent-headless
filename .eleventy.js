@@ -17,7 +17,8 @@ const {
   toAbsoluteUrl,
   stripHtml,
   minifyCss,
-  mdInline
+  mdInline,
+  wpToEleventy
 } = require('./config/filters/index.js');
 
 // module import shortcodes
@@ -70,6 +71,7 @@ module.exports = eleventyConfig => {
   eleventyConfig.addFilter('fromJson', JSON.parse);
   eleventyConfig.addFilter('cssmin', minifyCss);
   eleventyConfig.addFilter('md', mdInline);
+  eleventyConfig.addFilter('wpToEleventy', wpToEleventy);
   eleventyConfig.addFilter('keys', Object.keys);
   eleventyConfig.addFilter('values', Object.values);
   eleventyConfig.addFilter('entries', Object.entries);

@@ -6,7 +6,7 @@ layout: base
   <div class="wrapper flow prose">
     <h1 class="gradient-text">{{ posts.title.rendered }}</h1>
 
-    {{ posts.content.rendered safe }}
+    {{ posts.content.rendered | safe }}
     <!-- {{ posts.content.rendered | replace(env.CMS, '') | replace(env.MEDIAPATH, env.IMAGEPATH) | safe }} -->
   </div>
 </article>
