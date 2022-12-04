@@ -1,9 +1,9 @@
 const EleventyFetch = require('@11ty/eleventy-fetch');
 const wpUrl = process.env.CMS;
+const endpoint = `${wpUrl}/wp-json/wp/v2/posts`;
 
 async function getPosts() {
   try {
-    const endpoint = `${wpUrl}/wp-json/wp/v2/posts`;
     const response = EleventyFetch(endpoint, {
       duration: '2m',
       type: 'json'
