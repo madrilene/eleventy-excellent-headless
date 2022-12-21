@@ -1,5 +1,6 @@
 /**
  * I strive to keep the `.eleventy.js` file clean and uncluttered. Most adjustments must be made in:
+ *  - `./config/collections/index.js`
  *  - `./config/filters/index.js`
  *  - `./config/plugins/index.js`
  *  - `./config/shortcodes/index.js`
@@ -11,13 +12,13 @@ const {
   limit,
   toHtml,
   where,
-  excerpt,
   toISOString,
   formatDate,
   toAbsoluteUrl,
   stripHtml,
   minifyCss,
   mdInline,
+  excerpt,
   wpToEleventy
 } = require('./config/filters/index.js');
 
@@ -25,7 +26,7 @@ const {
 const {imageShortcodePlaceholder, liteYoutube} = require('./config/shortcodes/index.js');
 
 // module import collections
-const {wpPosts} = require('./config/collections/index.js');
+const {getAllPosts} = require('./config/collections/index.js');
 
 // module import transforms
 
@@ -36,10 +37,6 @@ const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const {slugifyString} = require('./config/utils');
 const {escape} = require('lodash');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
-
-// get access to environment variables in templates
-const inspect = require('node:util').inspect;
-require('dotenv').config();
 
 module.exports = eleventyConfig => {
   // Tell 11ty to use the .eleventyignore and ignore our .gitignore file
@@ -59,7 +56,6 @@ module.exports = eleventyConfig => {
   // 	---------------------  Custom filters -----------------------
   eleventyConfig.addFilter('limit', limit);
   eleventyConfig.addFilter('where', where);
-  eleventyConfig.addFilter('excerpt', excerpt);
   eleventyConfig.addFilter('escape', escape);
   eleventyConfig.addFilter('toHtml', toHtml);
   eleventyConfig.addFilter('toIsoString', toISOString);
@@ -71,12 +67,11 @@ module.exports = eleventyConfig => {
   eleventyConfig.addFilter('fromJson', JSON.parse);
   eleventyConfig.addFilter('cssmin', minifyCss);
   eleventyConfig.addFilter('md', mdInline);
+  eleventyConfig.addFilter('excerpt', excerpt);
   eleventyConfig.addFilter('wpToEleventy', wpToEleventy);
   eleventyConfig.addFilter('keys', Object.keys);
   eleventyConfig.addFilter('values', Object.values);
   eleventyConfig.addFilter('entries', Object.entries);
-
-  eleventyConfig.addFilter('inspect', value => inspect(value, {sorted: true}));
 
   // 	--------------------- Custom shortcodes ---------------------
   eleventyConfig.addNunjucksAsyncShortcode('imagePlaceholder', imageShortcodePlaceholder);
@@ -84,9 +79,14 @@ module.exports = eleventyConfig => {
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`); // current year, stephanie eckles
 
   // 	--------------------- Custom transforms ---------------------
+  eleventyConfig.addPlugin(require('./config/transforms/html-config.js'));
+
+  // 	--------------------- Custom Template Languages ---------------------
+  eleventyConfig.addPlugin(require('./config/template-languages/css-config.js'));
+  eleventyConfig.addPlugin(require('./config/template-languages/js-config.js'));
 
   // 	--------------------- Custom collections -----------------------
-  eleventyConfig.addCollection('posts', wpPosts);
+  eleventyConfig.addCollection('posts', getAllPosts);
 
   // 	--------------------- Plugins ---------------------
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -94,24 +94,19 @@ module.exports = eleventyConfig => {
   eleventyConfig.setLibrary('md', markdownLib);
   eleventyConfig.addPlugin(pluginRss);
 
-  // 	--------------------- Global data -----------------------
-
-  eleventyConfig.addGlobalData('env', process.env);
-
   // 	--------------------- Passthrough File Copy -----------------------
 
   // same path
-
   ['src/assets/fonts/', 'src/assets/images/'].forEach(path =>
     eleventyConfig.addPassthroughCopy(path)
   );
 
-  //  social icons and manifest to root directory
+  //  social icons to root directory
   eleventyConfig.addPassthroughCopy({
     'src/assets/images/favicon/*': '/'
   });
 
-  // 	--------------------- Config -----------------------
+  // 	--------------------- general config -----------------------
 
   return {
     dir: {
