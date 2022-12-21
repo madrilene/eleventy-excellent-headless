@@ -140,7 +140,7 @@ const mdInline = (content, opts) => {
 };
 
 const wpToEleventy = (content = '') => {
-  return content.replace(/{(\w+?):(.*?)}/g, `<span x-text="query.$1">$2</span>`);
+  return content.replace(/^(([a-z]+:)|(\/\/))/i, `<span x-text="query.$1">$2</span>`);
 };
 
 module.exports = {
@@ -159,5 +159,6 @@ module.exports = {
   toAbsoluteUrl,
   getLatestCollectionItemDate,
   minifyCss,
-  mdInline
+  mdInline,
+  wpToEleventy
 };

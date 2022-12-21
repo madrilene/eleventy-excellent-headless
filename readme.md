@@ -1,4 +1,6 @@
-# Eleventy starter
+# Eleventy Excellent - headless Wordpress
+
+**Not production ready.**
 
 Opiniated but easy to use [Eleventy](https://www.11ty.dev/) starter, based on the workflow suggested by Andy Bell's buildexcellentwebsit.es.
 
@@ -7,7 +9,7 @@ This starter is the same as the [native Eleventy starter](https://github.com/mad
 If you end up using this starter, feel free to send me a link, I'd love to see it!
 Also let me know if you miss any features. Currently in planning: automatically generated OpenGraph images (as fallback) and dark mode.
 
-- [Eleventy starter](#eleventy-starter)
+- [Eleventy Excellent - headless Wordpress](#eleventy-excellent---headless-wordpress)
   - [Preview](#preview)
   - [Features](#features)
   - [First steps](#first-steps)
